@@ -1,5 +1,6 @@
 @import "_fonts.css";
 @import "_resets.css";
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;700&display=swap');
 
 /* Definition of base styles. */
 :root {
@@ -7,23 +8,128 @@
     --color-white: #ffffff;
     --color-black: #000000;
     --color-accent: #ff0000;
-    /* gaps & sizes */
-    --gap-around: 40px;
+
     /* fonts */
-    --font-h1: normal 64px/120% serif;
+    --font-h1: 700 140px/100% 'Gothic A1', sans-serif;
+    --font-h2: 500 56px/120% 'Gothic A1', sans-serif;
+    --font-text: 400 18px/150% 'Gothic A1', sans-serif;
+
+    --color-dark: #110000;
+    --color-white: #FFFFFF;
 }
+
+h1 {
+    font: var(--font-h1);
+    text-transform: uppercase;
+    /* Stellt sicher, dass JESSICA immer groß geschrieben ist */
+}
+
+h2 {
+    font: var(--font-h2);
+    text-transform: uppercase;
+}
+
+/* Wendet die Fließtext-Schrift auf normale Textabsätze und h3 an */
+p,
+h3,
+body {
+    font: var(--font-text);
+}
+
 
 /* Styling of all available layout components. */
 [data-layout="header"] {
-    padding: var(--gap-around);
-    background-color: var(--color-accent);
+    background-color: grey;
     position: sticky;
-    top: 0;
     z-index: 100;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+
+    .logo {
+        width: 80px;
+        align-self: flex-start;
+    }
+
+    .nav-container {
+        .nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-end;
+
+            a {
+                text-decoration: none;
+                color: var(--color-white);
+            }
+        }
+    }
+    
 }
+
+
 [data-layout="footer"] {
-    padding: var(--gap-around);
     background-color: var(--color-accent);
+
+    .theme-dark {
+        background-color: var(--color-dark);
+        color: var(--color-white);
+    }
+
+    .theme-dark a {
+        color: var(--color-white);
+    }
+
+    .theme-white {
+        background-color: var(--color-white);
+        color: var(--color-dark);
+    }
+
+    .theme-white a {
+        color: var(--color-dark);
+    }
+
+    .footer-top {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 35vh;
+        background-color: var(--color-dark, #000000);
+        color: var(--color-white, #FFFFFF);
+    }
+
+    .footer-top a {
+        color: var(--color-white, #FFFFFF);
+        text-decoration: none;
+    }
+
+    .footer-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 20px;
+    }
+
+    .footer-center {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .nav-container {
+        .nav {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            gap: 20px;
+            list-style: none;
+        }
+    }
+
+    .logo {
+        width: 100vw;
+    }
 }
 
 /* Styling of all available page components. */
@@ -38,20 +144,23 @@
     position: relative;
     width: 100%;
 }
+
 [data-module="example"] {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    & > .image {
+
+    &>.image {
         position: absolute;
         width: 100%;
         height: 100%;
         object-fit: cover;
         inset: 0;
     }
-    & > .title {
+
+    &>.title {
         position: relative;
         color: white;
         font: var(--font-h1);
