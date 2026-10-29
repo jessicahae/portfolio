@@ -1,9 +1,11 @@
 <?php
 $menu = get_menu_by_slug('legals');
 $logo = get_globals_logo();
+$socials = get_globals_socials();
 
 $is_home = is_front_page();
 $theme_class = $is_home ? 'theme-dark' : 'theme-white';
+
 ?>
 
 <footer data-layout="footer" class="<?= $theme_class ?>">
@@ -18,14 +20,17 @@ $theme_class = $is_home ? 'theme-dark' : 'theme-white';
                 <?php endif; ?>
             </div>
             <div class="footer-copyright">
-                <span>© 2026</span>
+                <span>© Jessica Häseli 2026</span>
             </div>
         </div>
 
         <div class="footer-column footer-center">
             <div class="footer-socials">
-                <a href="#">INSTAGRAM</a><br>
-                <a href="#">LINKEDIN</a>
+            <?php foreach ($socials as $item) : ?>
+                        <a target="_blank" href="<?= $item['link'] ?>">
+                            <?= $item ['title'] ?>
+                        </a>
+            <?php endforeach; ?>
             </div>
             
             <nav class="nav-container">
