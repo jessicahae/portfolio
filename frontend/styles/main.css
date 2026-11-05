@@ -118,6 +118,9 @@ body {
     }
 
     .footer-socials {
+
+
+
         display: flex;
         flex-direction: column;
     }
@@ -163,7 +166,7 @@ body {
     }
 
     .hero-left p {
-        margin: 0;
+        margin-left: 6px;
         text-transform: uppercase;
         font-size: 0.8rem;
         letter-spacing: 1.5px;
@@ -171,14 +174,20 @@ body {
         text-align: justify;
     }
 
+    .hero-left p.category {
+        margin-bottom: 5px;
+        font-size: 0.6rem;
+    }
+
+
     .hero-image {
         grid-column: 6 / 13;
     }
 
     .hero-image img {
-        grid-column: 6 / 13;
-        display: block;
+        display: grid;
         width: 100%;
+        max-height: 65vh;
         height: auto;
         object-fit: cover;
     }
@@ -238,6 +247,60 @@ body {
     .footer-text p {
         margin-bottom: 1rem;
     }
+
+    /* Das Overlay-Verhalten */
+    #custom-lightbox {
+        display: none;
+        position: fixed;
+        /* Löst das Element vom Footer und legt es über den Bildschirm */
+        z-index: 99999;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.95);
+        align-items: center;
+        justify-content: center;
+    }
+
+    #custom-lightbox.active {
+        display: flex;
+    }
+
+    /* Das Bild in der Mitte */
+    #custom-lightbox img {
+        max-width: 90vw;
+        max-height: 90vh;
+        object-fit: contain;
+    }
+
+    /* Die Pfeile und der Schließen-Button */
+    .lightbox-btn {
+        position: absolute;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 3rem;
+        cursor: pointer;
+    }
+
+    .lightbox-close {
+        top: 20px;
+        right: 30px;
+    }
+
+    .lightbox-prev {
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .lightbox-next {
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
 }
 
 /* Styling of all available module components. */
@@ -269,6 +332,100 @@ body {
         text-align: center;
     }
 }
+
+[data-module="hero_front"] {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+
+    .background_image {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        opacity: 0.4;
+    }
+
+    .logo_big {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        position: absolute;
+        z-index: 2;
+    }
+
+
+    /* Carousel Animation */
+
+    .scene-3d {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        height: 100vh;
+        perspective: 1200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel-3d-track {
+        width: 350px;
+        height: 450px;
+        position: relative;
+        transform-style: preserve-3d;
+        /* Die Animation dreht sich endlos weiter */
+        animation: spin-carousel-3d 200s infinite linear;
+    }
+
+    .carousel-3d-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        
+        /* DER FIX: Versteckt die Hitboxen der Bilder, die hinter dir durchlaufen */
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        
+        will-change: transform;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            
+            /* Zwingt den Browser zur flüssigen GPU-Berechnung */
+            transform: translateZ(1px); 
+            transition: transform 0.4s ease;
+        }
+
+        /* Der Hover liegt auf dem Link und vergrössert das Bild darin */
+        &:hover img {
+            transform: scale(1.08) translateZ(1px);
+        }
+    }
+}
+
+@keyframes spin-carousel-3d {
+    from {
+        transform: translateZ(calc(var(--radius) - 250px)) rotateY(0deg);
+    }
+
+    to {
+        transform: translateZ(calc(var(--radius) - 250px)) rotateY(360deg);
+    }
+}
+
 
 /* Styling of all available teaser components. */
 

@@ -6,6 +6,11 @@ js_log($project);
 <main data-page="project" class="project-page">
   
 <div class="hero-left">
+        <p class="category">
+            <?php foreach ($project ['project_categories'] as $category) : ?>
+                <span class="category-item"><?= $category ?></span>
+            <?php endforeach; ?>
+        </p>
         <h1><?= $project['title'] ?></h1>
         <?= !empty($project['description']) ? wpautop($project['description']) : '' ?>
     </div>
