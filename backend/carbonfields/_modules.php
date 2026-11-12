@@ -14,7 +14,6 @@ Container::make('post_meta', 'Module')
             ])
             // hero_front
             ->add_fields('hero_front', 'Hero Startseite', [
-                Field::make('image', 'background_image', 'Hintergrundbild')->set_required(),
                 Field::make('complex', 'hero_carousel', 'Carousel Bilder')
                     ->add_fields([
                         Field::make('image', 'carousel_image', 'Bild')->set_required(),
@@ -41,7 +40,6 @@ function render_modules (): void {
                 $module['image'] = get_media_by_id($module['image']);
                 break;
             case 'hero_front':
-                $module['background_image'] = get_media_by_id($module['background_image']);
                 $module['logo'] = get_media_by_id($module['logo']);
 
                 foreach ($module['hero_carousel'] as $key => $slide) {
